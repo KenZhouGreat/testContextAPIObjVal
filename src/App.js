@@ -1,24 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { createContext } from 'react';
 import './App.css';
+import './component/InnerComponent';
+import InnerComponent from './component/InnerComponent';
+
+export const SomeContext = createContext();
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Title here</h1>
+      <SomeContext.Provider value={{ valueObj: {val1:"news", val2:"news2"} }}>
+        <SomeContext.Consumer>
+          {({valueObj, ...props}) => <InnerComponent valueObj={valueObj} />}
+        </SomeContext.Consumer>
+      </SomeContext.Provider>
     </div>
   );
 }
